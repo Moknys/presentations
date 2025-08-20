@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to the Future: How 1960s Code Still Runs Your 2024 Life</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="build-indicator hidden" id="build-indicator">
+            Build: <span id="build-progress">0/0</span>
+        </div>
+        
+        <!-- Slides will be dynamically generated here -->
+        <div id="slides-container">
+            <!-- Slides are populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Navigation Toggle Button (always visible) -->
+    <button class="nav-toggle" id="nav-toggle" title="Toggle Navigation">⌨</button>
+
+    <!-- Global Navigation Container -->
+    <div class="global-navigation" id="global-navigation">
+        <!-- Main Navigation -->
+        <div class="nav-main">
+            <button class="nav-btn" id="prev-btn">← Previous</button>
+            <span id="slide-indicator">Slide 1 of 12</span>
+            <button class="nav-btn" id="next-btn">Next →</button>
+        </div>
+        
+        <!-- Control Panel -->
+        <div class="nav-controls">
+            <!-- Language Switcher -->
+            <div class="language-switcher" id="language-switcher">
+                <button class="nav-btn" data-lang="en">EN</button>
+                <button class="nav-btn" data-lang="es">ES</button>
+            </div>
+            
+            <!-- Utility Buttons -->
+            <div class="nav-utilities">
+                <button class="utility-btn" id="home-button" title="Go to First Slide">⌂</button>
+                <button class="utility-btn" id="fullscreen-toggle" title="Toggle Fullscreen">⛶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load scripts in proper order -->
+    <script src="i18n.js"></script>
+    <script src="slides.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Initialize presentation with slides
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePresentation();
+        });
+        
+        function initializePresentation() {
+            const slidesContainer = document.getElementById('slides-container');
+            
+            // Clear any existing slides
+            slidesContainer.innerHTML = '';
+            
+            // Generate slides from definitions
+            if (window.slideDefinitions && window.renderSlide) {
+                window.slideDefinitions.slides.forEach((slideDef, index) => {
+                    const slideElement = window.renderSlide(slideDef, 'en');
+                    slidesContainer.appendChild(slideElement);
+                });
+                
+                // Initialize the presentation system
+                if (window.showSlide) {
+                    window.showSlide(0);
+                }
+            }
+        }
+        
+        // Function to regenerate slides when language changes
+        function regenerateSlides(language) {
+            const slidesContainer = document.getElementById('slides-container');
+            const currentSlideIndex = window.currentSlide || 0;
+            
+            // Clear existing slides
+            slidesContainer.innerHTML = '';
+            
+            // Regenerate slides in new language
+            if (window.slideDefinitions && window.renderSlide) {
+                window.slideDefinitions.slides.forEach((slideDef, index) => {
+                    const slideElement = window.renderSlide(slideDef, language);
+                    slidesContainer.appendChild(slideElement);
+                });
+                
+                // Restore current slide position
+                if (window.showSlide) {
+                    window.showSlide(currentSlideIndex);
+                }
+            }
+        }
+        
+        // Make regenerateSlides available globally
+        window.regenerateSlides = regenerateSlides;
+    </script>
+</body>
+</html> 

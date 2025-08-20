@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i18n Test - Presentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .lang-btn {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            background: white;
+        }
+        .lang-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .content-preview {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background: #f9f9f9;
+            margin: 10px 0;
+        }
+        .slide-title {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .slide-content {
+            color: #333;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Internationalization Test</h1>
+    <p>This page demonstrates the i18n system for the presentation. Switch languages to see the content change.</p>
+    
+    <div class="test-section">
+        <h2>Language Switcher</h2>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="setLanguage('en')">English</button>
+            <button class="lang-btn" onclick="setLanguage('es')">Español</button>
+        </div>
+        <p>Current Language: <strong id="current-lang">English</strong></p>
+        <p>System Status: <span id="system-status">Loading...</span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Content Preview</h2>
+        <div class="content-preview">
+            <div class="slide-title" id="slide1-title">Loading...</div>
+            <div class="slide-content" id="slide1-content">Loading...</div>
+        </div>
+        
+        <div class="content-preview">
+            <div class="slide-title" id="slide2-title">Loading...</div>
+            <div class="slide-content" id="slide2-content">Loading...</div>
+        </div>
+        
+        <div class="content-preview">
+            <div class="slide-title" id="slide3-title">Loading...</div>
+            <div class="slide-content" id="slide3-content">Loading...</div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Navigation Text</h2>
+        <p>Previous: <span id="nav-prev">Loading...</span></p>
+        <p>Next: <span id="nav-next">Loading...</span></p>
+        <p>Slide Indicator: <span id="slide-indicator">Loading...</span></p>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script>
+        // Test the i18n system
+        function setLanguage(lang) {
+            try {
+                if (window.i18n && window.i18n.setLanguageOnly) {
+                    // Set the language without updating presentation content
+                    window.i18n.setLanguageOnly(lang);
+                    // Update only the test content
+                    updateTestContent();
+                    updateLanguageButtons(lang);
+                } else {
+                    console.error('i18n system not available');
+                }
+            } catch (error) {
+                console.error('Error setting language:', error);
+            }
+        }
+        
+        function updateTestContent() {
+            if (window.i18n && window.i18n.getText) {
+                try {
+                    // Update slide content
+                    const slide1Title = document.getElementById('slide1-title');
+                    const slide1Content = document.getElementById('slide1-content');
+                    const slide2Title = document.getElementById('slide2-title');
+                    const slide2Content = document.getElementById('slide2-content');
+                    const slide3Title = document.getElementById('slide3-title');
+                    const slide3Content = document.getElementById('slide3-content');
+                    
+                    if (slide1Title) slide1Title.textContent = window.i18n.getText('slide1.title');
+                    if (slide1Content) slide1Content.textContent = window.i18n.getText('slide1.description');
+                    if (slide2Title) slide2Title.textContent = window.i18n.getText('slide2.title');
+                    if (slide2Content) slide2Content.textContent = window.i18n.getText('slide2.confession');
+                    if (slide3Title) slide3Title.textContent = window.i18n.getText('slide3.title');
+                    if (slide3Content) slide3Content.textContent = window.i18n.getText('slide3.hopperIdea');
+                    
+                    // Update navigation
+                    const navPrev = document.getElementById('nav-prev');
+                    const navNext = document.getElementById('nav-next');
+                    const slideIndicator = document.getElementById('slide-indicator');
+                    
+                    if (navPrev) navPrev.textContent = window.i18n.getText('navigation.previous');
+                    if (navNext) navNext.textContent = window.i18n.getText('navigation.next');
+                    if (slideIndicator) {
+                        slideIndicator.textContent = window.i18n.getText('navigation.slideIndicator')
+                            .replace('{current}', '1')
+                            .replace('{total}', '12');
+                    }
+                    
+                    // Update current language display
+                    const currentLang = document.getElementById('current-lang');
+                    if (currentLang) {
+                        currentLang.textContent = window.i18n.currentLanguage() === 'en' ? 'English' : 'Español';
+                    }
+                } catch (error) {
+                    console.error('Error updating test content:', error);
+                }
+            }
+        }
+        
+        function updateLanguageButtons(lang) {
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeBtn = document.querySelector(`[onclick="setLanguage('${lang}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            const systemStatus = document.getElementById('system-status');
+            
+            if (window.i18n && window.i18n.getText) {
+                systemStatus.textContent = 'Ready';
+                systemStatus.style.color = 'green';
+                // Only update test content, not the full presentation content
+                updateTestContent();
+            } else {
+                systemStatus.textContent = 'i18n system not loaded';
+                systemStatus.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html> 

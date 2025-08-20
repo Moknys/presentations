@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Slides Remote Control</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        
+        .connection-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff4444;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        .connection-status.connected {
+            background: #44ff44;
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .remote-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .control-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.9;
+        }
+        
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px 15px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .control-btn:hover, .control-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .control-btn .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .control-btn .label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .slide-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .slide-number {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .build-progress {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .fullscreen-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .fullscreen-btn:hover, .fullscreen-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(238, 90, 36, 0.4);
+        }
+        
+        .instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 480px) {
+            .remote-container {
+                padding: 20px;
+            }
+            
+            .control-btn {
+                padding: 15px 10px;
+                min-height: 70px;
+            }
+            
+            .control-btn .icon {
+                font-size: 20px;
+            }
+            
+            .control-btn .label {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span class="connection-status" id="connection-status"></span>
+        <span id="status-text">Connecting...</span>
+    </div>
+    
+    <div class="remote-container">
+        <h1 class="title">🎯 Slides Remote</h1>
+        
+        <div class="slide-info">
+            <div class="slide-number" id="slide-number">Slide 1 of 1</div>
+            <div class="build-progress" id="build-progress">Ready</div>
+        </div>
+        
+        <div class="control-section">
+            <div class="section-title">Navigation</div>
+            <div class="control-grid">
+                <button class="control-btn" id="prev-btn" onclick="sendCommand('previous')">
+                    <div class="icon">⬅️</div>
+                    <div class="label">Previous</div>
+                </button>
+                <button class="control-btn" id="next-btn" onclick="sendCommand('next')">
+                    <div class="icon">➡️</div>
+                    <div class="label">Next</div>
+                </button>
+            </div>
+        </div>
+        
+        <div class="control-section">
+            <div class="section-title">Build Control</div>
+            <div class="control-grid">
+                <button class="control-btn" id="prev-build-btn" onclick="sendCommand('previousBuild')">
+                    <div class="icon">⏮️</div>
+                    <div class="label">Prev Build</div>
+                </button>
+                <button class="control-btn" id="next-build-btn" onclick="sendCommand('nextBuild')">
+                    <div class="icon">⏭️</div>
+                    <div class="label">Next Build</div>
+                </button>
+            </div>
+        </div>
+        
+        <div class="control-section">
+            <div class="section-title">Quick Actions</div>
+            <div class="control-grid">
+                <button class="control-btn" id="home-btn" onclick="sendCommand('home')">
+                    <div class="icon">🏠</div>
+                    <div class="label">Home</div>
+                </button>
+                <button class="control-btn" id="end-btn" onclick="sendCommand('end')">
+                    <div class="icon">🏁</div>
+                    <div class="label">End</div>
+                </button>
+            </div>
+        </div>
+        
+        <button class="fullscreen-btn" id="fullscreen-btn" onclick="sendCommand('fullscreen')">
+            <span id="fullscreen-text">⛶ Enter Fullscreen</span>
+        </button>
+    </div>
+    
+
+    <script>
+        let ws = null;
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+        
+        // Get server URL from current location
+        const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? `ws://${window.location.hostname}:8080` 
+            : `ws://${window.location.hostname}:8080`;
+        
+        function connect() {
+            try {
+                ws = new WebSocket(serverUrl);
+                
+                ws.onopen = function() {
+                    console.log('Connected to server');
+                    updateConnectionStatus(true, 'Connected to slides');
+                    reconnectAttempts = 0;
+                };
+                
+                ws.onmessage = function(event) {
+                    try {
+                        const data = JSON.parse(event.data);
+                        handleServerMessage(data);
+                    } catch (error) {
+                        console.error('Error parsing message:', error);
+                    }
+                };
+                
+                ws.onclose = function() {
+                    console.log('Disconnected from server');
+                    updateConnectionStatus(false, 'Disconnected');
+                    
+                    // Attempt to reconnect
+                    if (reconnectAttempts < maxReconnectAttempts) {
+                        reconnectAttempts++;
+                        setTimeout(() => {
+                            console.log(`Reconnecting... Attempt ${reconnectAttempts}`);
+                            connect();
+                        }, 2000);
+                    } else {
+                        updateConnectionStatus(false, 'Connection failed');
+                    }
+                };
+                
+                ws.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                    updateConnectionStatus(false, 'Connection error');
+                };
+                
+            } catch (error) {
+                console.error('Connection error:', error);
+                updateConnectionStatus(false, 'Connection failed');
+            }
+        }
+        
+        function updateConnectionStatus(connected, text) {
+            const statusElement = document.getElementById('connection-status');
+            const textElement = document.getElementById('status-text');
+            
+            if (connected) {
+                statusElement.classList.add('connected');
+                textElement.textContent = text;
+            } else {
+                statusElement.classList.remove('connected');
+                textElement.textContent = text;
+            }
+        }
+        
+        function sendCommand(command) {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const message = {
+                    type: 'command',
+                    command: command,
+                    timestamp: Date.now()
+                };
+                
+                ws.send(JSON.stringify(message));
+                console.log('Sent command:', command);
+                
+                // Visual feedback
+                const button = event.target.closest('.control-btn, .fullscreen-btn');
+                if (button) {
+                    button.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        button.style.transform = '';
+                    }, 150);
+                }
+            } else {
+                console.warn('WebSocket not connected');
+                updateConnectionStatus(false, 'Not connected');
+            }
+        }
+        
+        function handleServerMessage(data) {
+            switch (data.type) {
+                case 'status':
+                    console.log('Status update:', data.message);
+                    break;
+                case 'slideUpdate':
+                    updateSlideInfo(data);
+                    break;
+                case 'buildUpdate':
+                    updateBuildInfo(data);
+                    break;
+                case 'fullscreenUpdate':
+                    updateFullscreenButton(data.fullscreen);
+                    break;
+            }
+        }
+        
+        function updateSlideInfo(data) {
+            const slideNumber = document.getElementById('slide-number');
+            const buildProgress = document.getElementById('build-progress');
+            
+            if (slideNumber) {
+                slideNumber.textContent = `Slide ${data.currentSlide + 1} of ${data.totalSlides}`;
+            }
+            
+            if (buildProgress) {
+                if (data.buildItems > 0) {
+                    buildProgress.textContent = `Build ${data.currentBuild}/${data.buildItems}`;
+                } else {
+                    buildProgress.textContent = 'Ready';
+                }
+            }
+        }
+        
+        function updateBuildInfo(data) {
+            const buildProgress = document.getElementById('build-progress');
+            if (buildProgress && data.buildItems > 0) {
+                buildProgress.textContent = `Build ${data.currentBuild}/${data.buildItems}`;
+            }
+        }
+        
+        function updateFullscreenButton(isFullscreen) {
+            const fullscreenText = document.getElementById('fullscreen-text');
+            if (fullscreenText) {
+                if (isFullscreen) {
+                    fullscreenText.textContent = '⛶ Exit Fullscreen';
+                } else {
+                    fullscreenText.textContent = '⛶ Enter Fullscreen';
+                }
+            }
+        }
+        
+        // Initialize connection when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            connect();
+            
+            // Add touch feedback for mobile
+            const buttons = document.querySelectorAll('.control-btn, .fullscreen-btn');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to the Future: How 1960s Code Still Runs Your 2024 Life</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="build-indicator hidden" id="build-indicator">
+            Build: <span id="build-progress">0/0</span>
+        </div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h1 data-i18n="slide1.title">Back to the Future</h1>
+                <h2 data-i18n="slide1.subtitle">How 1960s Code Still Runs Your 2024 Life</h2>
+            </div>
+            <div class="slide-content">
+                <p class="text-lg text-muted" data-i18n="slide1.description">A journey through programming's greatest hits</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Opening Hook -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide2.title">Quick Confession</h2>
+            </div>
+            <div class="slide-content">
+                <p><span class="highlight" data-i18n="slide2.confession">I'm old enough to remember when "the cloud" meant weather</span></p>
+                <br>
+                <p data-i18n="slide2.plotTwist">But here's the plot twist - every time you use an ATM, order an Uber, or pay for your overpriced coffee, you're interacting with code that's <span class="highlight">older than most of you</span></p>
+                <br>
+                <h3 data-i18n="slide2.adventureTitle">Today's Adventure:</h3>
+                <p data-i18n="slide2.adventure">Meet the OG languages that are basically the Beatles of programming - massively influential and somehow still relevant</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: COBOL Introduction -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide3.title">COBOL: The Language That Won't Quit</h2>
+                <h3 data-i18n="slide3.subtitle">When Computers Were the Size of Your Apartment (1959)</h3>
+            </div>
+            <div class="slide-content">
+                <p data-i18n="slide3.hopperIdea">Grace Hopper had a crazy idea: <span class="highlight">"What if computer code looked like actual sentences instead of secret government codes?"</span></p>
+                <br>
+                <div class="code-block">
+                    <span class="code-comment" data-i18n="slide3.beforeComment">// Before COBOL: What even is this??</span>
+                    <span class="code-function">MOV</span> <span class="code-type">AX</span>,<span class="code-number">1234</span>; <span class="code-function">JMP</span> <span class="code-number">5678</span>
+
+                    <span class="code-comment" data-i18n="slide3.afterComment">// After COBOL: Actual readable English!</span>
+                    <span class="code-keyword">ADD</span> <span class="code-string">CUSTOMER-AGE</span> <span class="code-keyword">TO</span> <span class="code-string">TOTAL-AGE</span>.
+                    <span class="code-keyword">DISPLAY</span> <span class="code-string">"Welcome back, valued customer!"</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: COBOL Stats -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide4.title">The Accidental World Domination</h2>
+            </div>
+            <div class="slide-content">
+                <p data-i18n="slide4.intro">COBOL became so successful it accidentally became too important to replace</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <div class="stat-label" data-i18n="slide4.stat1.label">of ATM transactions<br>(including your 3 AM McDonald's run)</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$3T</span>
+                        <div class="stat-label" data-i18n="slide4.stat2.label">processed daily<br>(more than most countries' GDP)</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">220B</span>
+                        <div class="stat-label" data-i18n="slide4.stat3.label">lines of code still running<br>(stack would reach the moon)</div>
+                    </div>
+                </div>
+                
+                <p class="mt-4"><span class="highlight">Y2K Flashback:</span> <span data-i18n="slide4.y2k">We weren't scared of the world ending - just our COBOL systems hiccupping!</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 5: COBOL Modern Relevance -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide5.title">Why COBOL is the Ultimate Flex</h2>
+            </div>
+            <div class="slide-content">
+                <div class="build-item">
+                    <h3 data-i18n="slide5.jobSecurity.title">Job Security Level: <span class="highlight">Legendary</span></h3>
+                    <p data-i18n="slide5.jobSecurity.description">COBOL programmers are basically digital unicorns</p>
+                </div>
+                
+                <div class="build-item">
+                    <h3 data-i18n="slide5.reliability.title">Reliability Record: <span class="highlight">Better uptime</span></h3>
+                    <p data-i18n="slide5.reliability.description">Than most modern apps</p>
+                </div>
+                
+                <div class="build-item">
+                    <h3 data-i18n="slide5.irony.title">The Irony: <span class="highlight">While we debate React vs Vue</span></h3>
+                    <p data-i18n="slide5.irony.description">COBOL quietly processes your student loan payments</p>
+                </div>
+                
+                <div class="build-item">
+                    <div class="quote" data-i18n="slide5.quote">"The language that refuses to die keeps your financial life alive"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Pascal Introduction -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide6.title">Pascal: The Helicopter Parent of Programming</h2>
+                <h3 data-i18n="slide6.subtitle">The Great Code Cleanup of 1970</h3>
+            </div>
+            <div class="slide-content">
+                <p data-i18n="slide6.situation"><span class="highlight">The situation:</span> 1960s programming was like texting without autocorrect - chaotic and full of mistakes</p>
+                <br>
+                <p data-i18n="slide6.wirth"><span class="highlight">Meet Niklaus Wirth:</span> Swiss perfectionist who looked at messy code and said "Nein! This will not do!"</p>
+                <br>
+                <p data-i18n="slide6.vibe"><span class="highlight">The vibe:</span> Pascal was like that friend who color-codes their closet and actually follows through</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Pascal Code Example -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide7.title">Pascal in Action</h2>
+            </div>
+            <div class="slide-content">
+                <div class="code-block code-block-small" data-i18n="slide7.code"><span class="code-keyword">program</span> <span class="code-function">MillennialLife</span>;
+
+<span class="code-keyword">var</span>
+  <span class="code-function">coffeeCount</span>: <span class="code-type">integer</span>;
+  <span class="code-function">rentMoney</span>: <span class="code-type">real</span>;
+  <span class="code-function">willSurvive</span>: <span class="code-type">boolean</span>;
+
+<span class="code-keyword">begin</span>
+  <span class="code-function">coffeeCount</span> <span class="code-operator">:=</span> <span class="code-number">5</span>;
+  <span class="code-function">rentMoney</span> <span class="code-operator">:=</span> <span class="code-number">2000.00</span>;
+  
+  <span class="code-keyword">if</span> (<span class="code-function">coffeeCount</span> <span class="code-operator">></span> <span class="code-number">3</span>) <span class="code-keyword">and</span> (<span class="code-function">rentMoney</span> <span class="code-keyword">></span> <span class="code-number">1500</span>) <span class="code-keyword">then</span>
+    <span class="code-function">willSurvive</span> <span class="code-operator">:=</span> <span class="code-keyword">false</span>
+  <span class="code-keyword">else</span>
+    <span class="code-function">willSurvive</span> <span class="code-operator">:=</span> <span class="code-keyword">true</span>;
+    
+  <span class="code-keyword">writeln</span>(<span class="code-string">'Millennial survival status: '</span>, <span class="code-function">willSurvive</span>);
+<span class="code-keyword">end</span>.</div>
+                <p class="mt-2 italic text-cyan" data-i18n="slide7.comment">Clean, organized, and it actually tells you what it's doing!</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Pascal's Impact -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide8.title">The Educational Takeover</h2>
+                <h3 data-i18n="slide8.subtitle">Pascal's Mission: Teach people to program <em>properly</em></h3>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li data-i18n="slide8.points.0"><span class="highlight">Plan before you code</span> (revolutionary concept!)</li>
+                    <li data-i18n="slide8.points.1"><span class="highlight">Make your intentions crystal clear</span></li>
+                    <li data-i18n="slide8.points.2"><span class="highlight">Catch mistakes before they become disasters</span></li>
+                </ul>
+                <br>
+                <p data-i18n="slide8.impact"><span class="highlight">The generational impact:</span> If you learned programming in school, Pascal probably taught you to think like a programmer</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Modern Languages Timeline -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide9.title">The Glow-Up Story: Pascal's Famous Children</h2>
+            </div>
+            <div class="slide-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1970</div>
+                        <div class="timeline-lang">Pascal</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2009</div>
+                        <div class="timeline-lang">Go</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2014</div>
+                        <div class="timeline-lang">Swift</div>
+                    </div>
+                </div>
+                <ul class="mt-4">
+                    <li data-i18n="slide9.swift"><span class="highlight">Swift (2014):</span> Apple took Pascal's "safety first" approach and made it Instagram-pretty</li>
+                    <li data-i18n="slide9.go"><span class="highlight">Go (2009):</span> Google's "What if programming was simple again?" - powers Netflix, Uber, and half the internet</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: The Great Circle -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide10.title">The Time Loop: Why Everything Old is New Again</h2>
+                <h3 data-i18n="slide10.subtitle">The Great Circle of Tech Life</h3>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li data-i18n="slide10.timeline.0"><span class="highlight">1960s:</span> "Make it readable!" (COBOL)</li>
+                    <li data-i18n="slide10.timeline.1"><span class="highlight">1970s:</span> "Make it organized!" (Pascal)</li>
+                    <li data-i18n="slide10.timeline.2"><span class="highlight">1980s-90s:</span> "Make it flexible!" (Chaos ensues)</li>
+                    <li data-i18n="slide10.timeline.3"><span class="highlight">2000s:</span> "Wait, why does everything break?" (Add types back)</li>
+                    <li data-i18n="slide10.timeline.4"><span class="highlight">2010s:</span> "Let's make simple, reliable languages!" (Rediscover Pascal's ideas)</li>
+                    <li data-i18n="slide10.timeline.5"><span class="highlight">2020s:</span> "Why is our infrastructure so complex?" (COBOL looking smug)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11: Daily Life Connection -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide11.title">Your Daily Life, Powered by Time Travel</h2>
+                <h3 data-i18n="slide11.subtitle">Morning Routine Reality Check:</h3>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li data-i18n="slide11.routine.0"><span class="highlight">Check bank balance →</span> Probably hitting COBOL somewhere</li>
+                    <li data-i18n="slide11.routine.1"><span class="highlight">Order coffee via app →</span> Swift (Pascal's grandchild)</li>
+                    <li data-i18n="slide11.routine.2"><span class="highlight">Stream music at work →</span> Go services (Pascal's philosophy)</li>
+                    <li data-i18n="slide11.routine.3"><span class="highlight">Pay for lunch →</span> COBOL processing your card</li>
+                </ul>
+                <br>
+                <div class="quote" data-i18n="slide11.quote">Your cutting-edge lifestyle depends on ideas from when your parents were in elementary school</div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Closing -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 data-i18n="slide12.title">The Real Lesson</h2>
+            </div>
+            <div class="slide-content">
+                <p class="text-xl mb-4" data-i18n="slide12.twist"><span class="highlight">The twist:</span> We keep thinking we're inventing the future, but we're mostly rediscovering the past with better fonts</p>
+                
+                <h3 data-i18n="slide12.whyMatters">Why This Matters:</h3>
+                <ul>
+                    <li data-i18n="slide12.points.0">Understanding these foundations helps you spot genuine innovation vs. rebranded old ideas</li>
+                    <li data-i18n="slide12.points.1">While everyone's arguing about the latest framework, people who understand fundamentals are quietly building things that work</li>
+                </ul>
+                
+                <br>
+                <div class="quote text-lg text-center" data-i18n="slide12.finalQuote">"In 2024, we're still solving the same basic problems as 1959 - how to make computers do useful things without breaking.<br><br>We just have better memes about it now."</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Toggle Button (always visible) -->
+    <button class="nav-toggle" id="nav-toggle" onclick="toggleNavigation()" title="Toggle Navigation">⌨</button>
+
+    <!-- Global Navigation Container -->
+    <div class="global-navigation" id="global-navigation">
+        <!-- Main Navigation -->
+        <div class="nav-main">
+            <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Previous</button>
+            <span id="slide-indicator">Slide 1 of 12</span>
+            <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next →</button>
+        </div>
+        
+        <!-- Control Panel -->
+        <div class="nav-controls">
+            <!-- Language Switcher -->
+            <div class="language-switcher" id="language-switcher">
+                <button class="nav-btn" data-lang="en">EN</button>
+                <button class="nav-btn" data-lang="es">ES</button>
+            </div>
+            
+            <!-- Utility Buttons -->
+            <div class="nav-utilities">
+                <button class="utility-btn" id="home-button" onclick="goToFirstSlide()" title="Go to First Slide">⌂</button>
+                <button class="utility-btn" id="fullscreen-toggle" onclick="toggleFullscreen()" title="Toggle Fullscreen">⛶</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

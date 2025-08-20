@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Style Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Override presentation styles for style guide */
+        body {
+            overflow: auto !important;
+            height: auto !important;
+        }
+        
+        .style-guide {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 121, 198, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 121, 198, 0.2);
+        }
+        
+        .section h2 {
+            color: #ff79c6;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .example {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(139, 233, 253, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #8be9fd;
+        }
+        
+        .example h3 {
+            color: #8be9fd;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .code-example {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .color-swatch {
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .font-showcase {
+            margin: 1rem 0;
+        }
+        
+        .font-example {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        .component-demo {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(80, 250, 123, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #50fa7b;
+        }
+        
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .demo-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="style-guide">
+        <h1 class="text-center mb-4 text-pink">Presentation Style Guide</h1>
+        
+        <!-- Typography Section -->
+        <div class="section">
+            <h2>Typography</h2>
+            
+            <div class="example">
+                <h3>Headings (H1-H6)</h3>
+                <div class="font-showcase">
+                    <div class="font-example">
+                        <h1>Heading 1 - Main Title</h1>
+                        <div class="code-example">&lt;h1&gt;Heading 1 - Main Title&lt;/h1&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h2>Heading 2 - Section Title</h2>
+                        <div class="code-example">&lt;h2&gt;Heading 2 - Section Title&lt;/h2&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h3>Heading 3 - Subsection</h3>
+                        <div class="code-example">&lt;h3&gt;Heading 3 - Subsection&lt;/h3&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h4>Heading 4 - Minor Section</h4>
+                        <div class="code-example">&lt;h4&gt;Heading 4 - Minor Section&lt;/h4&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h5>Heading 5 - Small Section</h5>
+                        <div class="code-example">&lt;h5&gt;Heading 5 - Small Section&lt;/h5&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h6>Heading 6 - Tiny Section</h6>
+                        <div class="code-example">&lt;h6&gt;Heading 6 - Tiny Section&lt;/h6&gt;</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h3>Body Text</h3>
+                <div class="font-showcase">
+                    <div class="font-example">
+                        <p>This is regular paragraph text. It uses the Inter font family and is optimized for readability on screens.</p>
+                        <div class="code-example">&lt;p&gt;This is regular paragraph text...&lt;/p&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <p><strong>This is bold text</strong> and <em>this is italic text</em>.</p>
+                        <div class="code-example">&lt;p&gt;&lt;strong&gt;This is bold text&lt;/strong&gt; and &lt;em&gt;this is italic text&lt;/em&gt;.&lt;/p&gt;</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h3>Monospace Font (JetBrains Mono)</h3>
+                <div class="font-showcase">
+                    <div class="font-example font-mono">
+                        <p>This is monospace text for code examples.</p>
+                        <p>function example() { return "Hello World"; }</p>
+                        <div class="code-example">&lt;p class="font-mono"&gt;This is monospace text&lt;/p&gt;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Color Palette Section -->
+        <div class="section">
+            <h2>Color Palette</h2>
+            
+            <div class="color-palette">
+                <div class="color-swatch bg-dark text-light border">
+                    Background<br>#0d1117
+                </div>
+                <div class="color-swatch bg-light text-dark">
+                    Text<br>#f8f8f2
+                </div>
+                <div class="color-swatch bg-pink text-dark">
+                    Pink<br>#ff79c6
+                </div>
+                <div class="color-swatch bg-cyan text-dark">
+                    Cyan<br>#8be9fd
+                </div>
+                <div class="color-swatch bg-green text-dark">
+                    Green<br>#50fa7b
+                </div>
+                <div class="color-swatch bg-orange text-dark">
+                    Orange<br>#ffb86c
+                </div>
+                <div class="color-swatch bg-purple text-dark">
+                    Purple<br>#bd93f9
+                </div>
+                <div class="color-swatch bg-yellow text-dark">
+                    Yellow<br>#f1fa8c
+                </div>
+                <div class="color-swatch bg-muted text-light">
+                    Muted<br>#6272a4
+                </div>
+            </div>
+        </div>
+        
+        <!-- Highlight Section -->
+        <div class="section">
+            <h2>Highlight Class</h2>
+            
+            <div class="example">
+                <h3>Highlight Text</h3>
+                <div class="font-showcase">
+                    <div class="font-example">
+                        <p>This is <span class="highlight">highlighted text</span> that stands out.</p>
+                        <div class="code-example">&lt;span class="highlight"&gt;highlighted text&lt;/span&gt;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Code Blocks Section -->
+        <div class="section">
+            <h2>Code Blocks</h2>
+            
+            <div class="example">
+                <h3>Standard Code Block</h3>
+                <div class="code-block">
+<span class="code-keyword">function</span> <span class="code-function">example</span>() {
+    <span class="code-keyword">const</span> <span class="code-function">message</span> = <span class="code-string">"Hello World"</span>;
+    <span class="code-keyword">return</span> <span class="code-function">message</span>;
+}
+                </div>
+                <div class="code-example">&lt;div class="code-block"&gt;
+    &lt;span class="code-keyword"&gt;function&lt;/span&gt; &lt;span class="code-function"&gt;example&lt;/span&gt;() {
+        &lt;span class="code-keyword"&gt;const&lt;/span&gt; &lt;span class="code-function"&gt;message&lt;/span&gt; = &lt;span class="code-string"&gt;"Hello World"&lt;/span&gt;;
+        &lt;span class="code-keyword"&gt;return&lt;/span&gt; &lt;span class="code-function"&gt;message&lt;/span&gt;;
+    }
+&lt;/div&gt;</div>
+            </div>
+            
+            <div class="example">
+                <h3>Code Block Sizes</h3>
+                <div class="font-showcase">
+                    <div class="font-example">
+                        <h4>Small Code Block</h4>
+                        <div class="code-block code-block-small">
+<span class="code-keyword">const</span> <span class="code-function">small</span> = <span class="code-string">"compact"</span>;
+                        </div>
+                        <div class="code-example">&lt;div class="code-block code-block-small"&gt;...&lt;/div&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h4>Medium Code Block (Default)</h4>
+                        <div class="code-block code-block-medium">
+<span class="code-keyword">const</span> <span class="code-function">medium</span> = <span class="code-string">"standard"</span>;
+                        </div>
+                        <div class="code-example">&lt;div class="code-block code-block-medium"&gt;...&lt;/div&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h4>Large Code Block</h4>
+                        <div class="code-block code-block-large">
+<span class="code-keyword">const</span> <span class="code-function">large</span> = <span class="code-string">"prominent"</span>;
+                        </div>
+                        <div class="code-example">&lt;div class="code-block code-block-large"&gt;...&lt;/div&gt;</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h3>Code Syntax Classes</h3>
+                <div class="font-showcase">
+                    <div class="font-example">
+                        <span class="code-keyword">keyword</span> - <span class="code-function">function</span> - <span class="code-string">string</span> - <span class="code-number">number</span> - <span class="code-comment">comment</span> - <span class="code-type">type</span> - <span class="code-operator">operator</span>
+                    </div>
+                    <div class="code-example">
+                        &lt;span class="code-keyword"&gt;keyword&lt;/span&gt;<br>
+                        &lt;span class="code-function"&gt;function&lt;/span&gt;<br>
+                        &lt;span class="code-string"&gt;string&lt;/span&gt;<br>
+                        &lt;span class="code-number"&gt;number&lt;/span&gt;<br>
+                        &lt;span class="code-comment"&gt;comment&lt;/span&gt;<br>
+                        &lt;span class="code-type"&gt;type&lt;/span&gt;<br>
+                        &lt;span class="code-operator"&gt;operator&lt;/span&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quote Section -->
+        <div class="section">
+            <h2>Quote Blocks</h2>
+            
+            <div class="example">
+                <h3>Standard Quote</h3>
+                <div class="quote">
+                    "This is a quote block that stands out from the rest of the content. It's perfect for highlighting important statements or memorable quotes."
+                </div>
+                <div class="code-example">&lt;div class="quote"&gt;
+    "This is a quote block that stands out..."
+&lt;/div&gt;</div>
+            </div>
+        </div>
+        
+        <!-- Lists Section -->
+        <div class="section">
+            <h2>Lists</h2>
+            
+            <div class="example">
+                <h3>Unordered List</h3>
+                <ul>
+                    <li>First item in the list</li>
+                    <li>Second item with <span class="highlight">highlighted text</span></li>
+                    <li>Third item</li>
+                </ul>
+                <div class="code-example">&lt;ul&gt;
+    &lt;li&gt;First item in the list&lt;/li&gt;
+    &lt;li&gt;Second item with &lt;span class="highlight"&gt;highlighted text&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ul&gt;</div>
+            </div>
+            
+            <div class="example">
+                <h3>Ordered List</h3>
+                <ol>
+                    <li>First step</li>
+                    <li>Second step</li>
+                    <li>Third step</li>
+                </ol>
+                <div class="code-example">&lt;ol&gt;
+    &lt;li&gt;First step&lt;/li&gt;
+    &lt;li&gt;Second step&lt;/li&gt;
+    &lt;li&gt;Third step&lt;/li&gt;
+&lt;/ol&gt;</div>
+            </div>
+        </div>
+        
+        <!-- Stats Grid Section -->
+        <div class="section">
+            <h2>Stats Grid</h2>
+            
+            <div class="example">
+                <h3>Statistics Grid</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1.2M</span>
+                        <div class="stat-label">Users Worldwide</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+                <div class="code-example">&lt;div class="stats-grid"&gt;
+    &lt;div class="stat-item"&gt;
+        &lt;span class="stat-number"&gt;95%&lt;/span&gt;
+        &lt;div class="stat-label"&gt;Success Rate&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-item"&gt;
+        &lt;span class="stat-number"&gt;1.2M&lt;/span&gt;
+        &lt;div class="stat-label"&gt;Users Worldwide&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-item"&gt;
+        &lt;span class="stat-number"&gt;24/7&lt;/span&gt;
+        &lt;div class="stat-label"&gt;Uptime&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </div>
+        
+        <!-- Timeline Section -->
+        <div class="section">
+            <h2>Timeline</h2>
+            
+            <div class="example">
+                <h3>Timeline Component</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-lang">Start</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-lang">Growth</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-lang">Now</div>
+                    </div>
+                </div>
+                <div class="code-example">&lt;div class="timeline"&gt;
+    &lt;div class="timeline-item"&gt;
+        &lt;div class="timeline-year"&gt;2020&lt;/div&gt;
+        &lt;div class="timeline-lang"&gt;Start&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="timeline-item"&gt;
+        &lt;div class="timeline-year"&gt;2022&lt;/div&gt;
+        &lt;div class="timeline-lang"&gt;Growth&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="timeline-item"&gt;
+        &lt;div class="timeline-year"&gt;2024&lt;/div&gt;
+        &lt;div class="timeline-lang"&gt;Now&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </div>
+        
+        <!-- Content Sizing Section -->
+        <div class="section">
+            <h2>Content Sizing</h2>
+            
+            <div class="example">
+                <h3>Content Size Classes</h3>
+                <div class="font-showcase">
+                    <div class="font-example">
+                        <h4>Small Content</h4>
+                        <div class="content-small">
+                            <p>This is small content with reduced width and font size. Perfect for concise information.</p>
+                        </div>
+                        <div class="code-example">&lt;div class="content-small"&gt;...&lt;/div&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h4>Medium Content (Default)</h4>
+                        <div class="content-medium">
+                            <p>This is medium content with standard width and font size. Good for most content.</p>
+                        </div>
+                        <div class="code-example">&lt;div class="content-medium"&gt;...&lt;/div&gt;</div>
+                    </div>
+                    <div class="font-example">
+                        <h4>Large Content</h4>
+                        <div class="content-large">
+                            <p>This is large content with increased width and font size. Great for important information.</p>
+                        </div>
+                        <div class="code-example">&lt;div class="content-large"&gt;...&lt;/div&gt;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Build Items Section -->
+        <div class="section">
+            <h2>Build Items (Progressive Reveals)</h2>
+            
+            <div class="example">
+                <h3>Build Item Structure</h3>
+                <div class="component-demo">
+                    <div class="build-item">
+                        <h3>First Point</h3>
+                        <p>This appears first when you click or press space.</p>
+                    </div>
+                    
+                    <div class="build-item">
+                        <h3>Second Point</h3>
+                        <p>This appears second.</p>
+                    </div>
+                    
+                    <div class="build-item">
+                        <h3>Third Point</h3>
+                        <p>This appears third.</p>
+                    </div>
+                </div>
+                <div class="code-example">&lt;div class="build-item"&gt;
+    &lt;h3&gt;First Point&lt;/h3&gt;
+    &lt;p&gt;This appears first when you click or press space.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="build-item"&gt;
+    &lt;h3&gt;Second Point&lt;/h3&gt;
+    &lt;p&gt;This appears second.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="build-item"&gt;
+    &lt;h3&gt;Third Point&lt;/h3&gt;
+    &lt;p&gt;This appears third.&lt;/p&gt;
+&lt;/div&gt;</div>
+            </div>
+        </div>
+        
+        <!-- Slide Structure Section -->
+        <div class="section">
+            <h2>Slide Structure</h2>
+            
+            <div class="example">
+                <h3>Basic Slide Template</h3>
+                <div class="code-example">&lt;div class="slide"&gt;
+    &lt;div class="slide-header"&gt;
+        &lt;h2&gt;Your Slide Title&lt;/h2&gt;
+        &lt;h3&gt;Optional Subtitle&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;div class="slide-content"&gt;
+        &lt;p&gt;Your slide content goes here.&lt;/p&gt;
+        
+        &lt;ul&gt;
+            &lt;li&gt;Point 1&lt;/li&gt;
+            &lt;li&gt;Point 2&lt;/li&gt;
+        &lt;/ul&gt;
+        
+        &lt;div class="quote"&gt;
+            "An important quote or statement"
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+            
+            <div class="example">
+                <h3>Slide with Build Items</h3>
+                <div class="code-example">&lt;div class="slide"&gt;
+    &lt;div class="slide-header"&gt;
+        &lt;h2&gt;Progressive Reveal Slide&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class="slide-content"&gt;
+        &lt;div class="build-item"&gt;
+            &lt;h3&gt;First Point&lt;/h3&gt;
+            &lt;p&gt;This appears first&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="build-item"&gt;
+            &lt;h3&gt;Second Point&lt;/h3&gt;
+            &lt;p&gt;This appears second&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </div>
+        
+        <!-- Navigation Section -->
+        <div class="section">
+            <h2>Navigation Controls</h2>
+            
+            <div class="example">
+                <h3>Available Controls</h3>
+                <div class="grid-demo">
+                    <div class="demo-item">
+                        <h4>Home Button</h4>
+                        <p>⌂ - Bottom left</p>
+                        <p>Goes to first slide</p>
+                    </div>
+                    <div class="demo-item">
+                        <h4>Navigation Toggle</h4>
+                        <p>⌨ - Bottom right</p>
+                        <p>Shows/hides navigation</p>
+                    </div>
+                    <div class="demo-item">
+                        <h4>Fullscreen Toggle</h4>
+                        <p>⛶ - Top right</p>
+                        <p>Toggle fullscreen mode</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h3>Keyboard Shortcuts</h3>
+                <div class="grid-demo">
+                    <div class="demo-item">
+                        <h4>Navigation</h4>
+                        <p>→ or Space: Next</p>
+                        <p>←: Previous</p>
+                        <p>Home: First slide</p>
+                        <p>End: Last slide</p>
+                    </div>
+                    <div class="demo-item">
+                        <h4>Fullscreen</h4>
+                        <p>F11: Toggle fullscreen</p>
+                        <p>Ctrl+F: Toggle fullscreen</p>
+                        <p>Esc: Exit fullscreen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
