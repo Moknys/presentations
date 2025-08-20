@@ -5,8 +5,7 @@ let isFullscreen = false;
 const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
-// WebSocket connection for remote control
-let ws = null;
+// HTTP polling for remote control (Vercel-compatible)
 let wsReconnectAttempts = 0;
 const maxWsReconnectAttempts = 5;
 
@@ -532,49 +531,32 @@ setTimeout(() => {
 // Start auto-hide timer
 resetNavTimeout();
 
-// WebSocket functions for remote control
-function connectWebSocket() {
-    try {
-        // Get server URL from current location
-        const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-            ? `ws://${window.location.hostname}:8080?type=slides` 
-            : `ws://${window.location.hostname}:8080?type=slides`;
-        
-        ws = new WebSocket(serverUrl);
-        
-        ws.onopen = function() {
-            console.log('Connected to remote control server');
-            wsReconnectAttempts = 0;
-        };
-        
-        ws.onmessage = function(event) {
-            try {
-                const data = JSON.parse(event.data);
-                handleRemoteCommand(data);
-            } catch (error) {
-                console.error('Error parsing remote command:', error);
-            }
-        };
-        
-        ws.onclose = function() {
-            console.log('Disconnected from remote control server');
+// HTTP polling for remote control (Vercel-compatible)
+let lastCommandTimestamp = 0;
+let pollingInterval;
+
+function startPolling() {
+    console.log('Starting HTTP polling for remote commands');
+    
+    pollingInterval = setInterval(async () => {
+        try {
+            const response = await fetch('/api/command');
+            const data = await response.json();
             
-            // Attempt to reconnect
-            if (wsReconnectAttempts < maxWsReconnectAttempts) {
-                wsReconnectAttempts++;
-                setTimeout(() => {
-                    console.log(`Reconnecting to remote control server... Attempt ${wsReconnectAttempts}`);
-                    connectWebSocket();
-                }, 2000);
+            if (data.lastCommand && data.lastCommand.timestamp > lastCommandTimestamp) {
+                lastCommandTimestamp = data.lastCommand.timestamp;
+                handleRemoteCommand({ type: 'command', command: data.lastCommand.command });
             }
-        };
-        
-        ws.onerror = function(error) {
-            console.error('WebSocket error:', error);
-        };
-        
-    } catch (error) {
-        console.error('WebSocket connection error:', error);
+        } catch (error) {
+            console.error('Error polling for commands:', error);
+        }
+    }, 500); // Poll every 500ms
+}
+
+function stopPolling() {
+    if (pollingInterval) {
+        clearInterval(pollingInterval);
+        pollingInterval = null;
     }
 }
 
@@ -611,15 +593,9 @@ function handleRemoteCommand(data) {
 }
 
 function sendRemoteUpdate(type, data) {
-    if (ws && ws.readyState === WebSocket.OPEN) {
-        const message = {
-            type: type,
-            ...data,
-            timestamp: Date.now()
-        };
-        
-        ws.send(JSON.stringify(message));
-    }
+    // HTTP polling approach doesn't need to send updates to server
+    // The server polls for commands instead
+    console.log('Update:', type, data);
 }
 
 function getCurrentBuildItemsCount() {
@@ -630,11 +606,11 @@ function getCurrentBuildItemsCount() {
     return 0;
 }
 
-// Initialize WebSocket connection
+// Initialize HTTP polling
 function initializeRemoteControl() {
-    // Wait a bit for the page to load before connecting
+    // Wait a bit for the page to load before starting polling
     setTimeout(() => {
-        connectWebSocket();
+        startPolling();
     }, 1000);
 }
 

@@ -270,55 +270,23 @@
         let reconnectAttempts = 0;
         const maxReconnectAttempts = 5;
         
-        // Get server URL from current location
-        const serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-            ? `ws://${window.location.hostname}:8080` 
-            : `ws://${window.location.hostname}:8080`;
+        // Using HTTP API instead of WebSocket for Vercel compatibility
         
         function connect() {
-            try {
-                ws = new WebSocket(serverUrl);
-                
-                ws.onopen = function() {
-                    console.log('Connected to server');
+            console.log('Connecting to server via HTTP');
+            updateConnectionStatus(true, 'Connected to slides');
+            
+            // Test the connection
+            fetch('/api/health')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Server health check:', data);
                     updateConnectionStatus(true, 'Connected to slides');
-                    reconnectAttempts = 0;
-                };
-                
-                ws.onmessage = function(event) {
-                    try {
-                        const data = JSON.parse(event.data);
-                        handleServerMessage(data);
-                    } catch (error) {
-                        console.error('Error parsing message:', error);
-                    }
-                };
-                
-                ws.onclose = function() {
-                    console.log('Disconnected from server');
-                    updateConnectionStatus(false, 'Disconnected');
-                    
-                    // Attempt to reconnect
-                    if (reconnectAttempts < maxReconnectAttempts) {
-                        reconnectAttempts++;
-                        setTimeout(() => {
-                            console.log(`Reconnecting... Attempt ${reconnectAttempts}`);
-                            connect();
-                        }, 2000);
-                    } else {
-                        updateConnectionStatus(false, 'Connection failed');
-                    }
-                };
-                
-                ws.onerror = function(error) {
-                    console.error('WebSocket error:', error);
-                    updateConnectionStatus(false, 'Connection error');
-                };
-                
-            } catch (error) {
-                console.error('Connection error:', error);
-                updateConnectionStatus(false, 'Connection failed');
-            }
+                })
+                .catch(error => {
+                    console.error('Connection error:', error);
+                    updateConnectionStatus(false, 'Connection failed');
+                });
         }
         
         function updateConnectionStatus(connected, text) {
@@ -334,16 +302,20 @@
             }
         }
         
-        function sendCommand(command) {
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                const message = {
-                    type: 'command',
-                    command: command,
-                    timestamp: Date.now()
-                };
+        async function sendCommand(command) {
+            try {
+                const response = await fetch('/api/command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        command: command
+                    })
+                });
                 
-                ws.send(JSON.stringify(message));
-                console.log('Sent command:', command);
+                const result = await response.json();
+                console.log('Sent command:', command, result);
                 
                 // Visual feedback
                 const button = event.target.closest('.control-btn, .fullscreen-btn');
@@ -353,9 +325,11 @@
                         button.style.transform = '';
                     }, 150);
                 }
-            } else {
-                console.warn('WebSocket not connected');
-                updateConnectionStatus(false, 'Not connected');
+                
+                updateConnectionStatus(true, 'Command sent');
+            } catch (error) {
+                console.error('Failed to send command:', error);
+                updateConnectionStatus(false, 'Connection error');
             }
         }
         
